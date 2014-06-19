@@ -10,7 +10,7 @@
 		"category":		"General",				// Prefer to re-use existing categories, but you can set anything here
 		"type":			"object",				// either "world" (appears in layout and is drawn), else "object"
 		"rotatable":	true,					// only used when "type" is "world".  Enables an angle property on the object.
-		"flags":		0,
+		"flags":		0 | pf_singleglobal		// exists project-wide, e.g. mouse, keyboard.  "type" must be "object".
 		"dependency": "sprintf.js"
 	};
 };

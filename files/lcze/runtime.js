@@ -96,31 +96,14 @@ cr.plugins_.lcze = function(runtime)
 	/**BEGIN-PREVIEWONLY**/
 	instanceProto.getDebuggerValues = function (propsections)
 	{
-		// Append to propsections any debugger sections you want to appear.
-		// Each section is an object with two members: "title" and "properties".
-		// "properties" is an array of individual debugger properties to display
-		// with their name and value, and some other optional settings.
 		propsections.push({
 			"title": "My debugger section",
-			"properties": [
-				// Each property entry can use the following values:
-				// "name" (required): name of the property (must be unique within this section)
-				// "value" (required): a boolean, number or string for the value
-				// "html" (optional, default false): set to true to interpret the name and value
-				//									 as HTML strings rather than simple plain text
-				// "readonly" (optional, default false): set to true to disable editing the property
-				
-				// Example:
-				// {"name": "My property", "value": this.myValue}
-			]
+			"properties": [	]
 		});
 	};
 	
 	instanceProto.onDebugValueEdited = function (header, name, value)
 	{
-		// Called when a non-readonly property has been edited in the debugger. Usually you only
-		// will need 'name' (the property name) and 'value', but you can also use 'header' (the
-		// header title for the section) to distinguish properties with the same name.
 		if (name === "My property")
 			this.myProperty = value;
 	};
@@ -140,7 +123,7 @@ cr.plugins_.lcze = function(runtime)
 	// Expressions
 	function Exps() {};
 	
-	Exps.prototype.GetSimpleString = function (ret, expr_)	// 'ret' must always be the first parameter - always return the expression's result through it!
+	Exps.prototype.GetSimpleString = function (ret, expr_)	
 	{
 		// Check if is Windows Platform...
 		ret.set_string(this._res["getString"](expr_).value);
