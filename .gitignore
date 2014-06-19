@@ -1,2 +1,4 @@
 # Test files
 test.*
+*.c2addon
+Thumbs.db
