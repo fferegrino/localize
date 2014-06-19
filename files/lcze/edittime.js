@@ -16,21 +16,6 @@
 };
 
 ////////////////////////////////////////
-// Parameter types:
-// AddNumberParam(label, description [, initial_string = "0"])			// a number
-// AddStringParam(label, description [, initial_string = "\"\""])		// a string
-// AddAnyTypeParam(label, description [, initial_string = "0"])			// accepts either a number or string
-// AddCmpParam(label, description)										// combo with equal, not equal, less, etc.
-// AddComboParamOption(text)											// (repeat before "AddComboParam" to add combo items)
-// AddComboParam(label, description [, initial_selection = 0])			// a dropdown list parameter
-// AddObjectParam(label, description)									// a button to click and pick an object type
-// AddLayerParam(label, description)									// accepts either a layer number or name (string)
-// AddLayoutParam(label, description)									// a dropdown list with all project layouts
-// AddKeybParam(label, description)										// a button to click and press a key (returns a VK)
-// AddAnimationParam(label, description)								// a string intended to specify an animation name
-// AddAudioFileParam(label, description)								// a dropdown list with all imported project audio files
-
-////////////////////////////////////////
 // Conditionss
 
 ////////////////////////////////////////
@@ -46,16 +31,6 @@ AddExpression(0, ef_return_string, "Get string and format number", "Strings", "G
 
 ////////////////////////////////////////
 ACESDone();
-
-////////////////////////////////////////
-// Array of property grid properties for this plugin
-// new cr.Property(ept_integer,		name,	initial_value,	description)		// an integer value
-// new cr.Property(ept_float,		name,	initial_value,	description)		// a float value
-// new cr.Property(ept_text,		name,	initial_value,	description)		// a string
-// new cr.Property(ept_color,		name,	initial_value,	description)		// a color dropdown
-// new cr.Property(ept_font,		name,	"Arial,-16", 	description)		// a font with the given face name and size
-// new cr.Property(ept_combo,		name,	"Item 1",		description, "Item 1|Item 2|Item 3")	// a dropdown list (initial_value is string of initially selected item)
-// new cr.Property(ept_link,		name,	link_text,		description, "firstonly")		// has no associated value; simply calls "OnPropertyChanged" on click
 
 var property_list = [];
 	
