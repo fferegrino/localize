@@ -6,19 +6,14 @@ assert2(cr.plugins_, "cr.plugins_ not created");
 
 /////////////////////////////////////
 // Plugin class
-// *** CHANGE THE PLUGIN ID HERE *** - must match the "id" property in edittime.js
-//          vvvvvvvv
-cr.plugins_.MyPlugin = function(runtime)
+cr.plugins_.lcze = function(runtime)
 {
 	this.runtime = runtime;
 };
 
 (function ()
 {
-	/////////////////////////////////////
-	// *** CHANGE THE PLUGIN ID HERE *** - must match the "id" property in edittime.js
-	//                            vvvvvvvv
-	var pluginProto = cr.plugins_.MyPlugin.prototype;
+	var pluginProto = cr.plugins_.lcze.prototype;
 		
 	/////////////////////////////////////
 	// Object type class
@@ -51,9 +46,8 @@ cr.plugins_.MyPlugin = function(runtime)
 	// called whenever an instance is created
 	instanceProto.onCreate = function()
 	{
-		// note the object is sealed after this call; ensure any properties you'll ever need are set on the object
-		// e.g...
-		// this.myValue = 0;
+		// Check if Windows appCodeName
+		this._res = WinJS["Resources"];
 	};
 	
 	// called whenever an instance is destroyed
@@ -135,48 +129,26 @@ cr.plugins_.MyPlugin = function(runtime)
 	//////////////////////////////////////
 	// Conditions
 	function Cnds() {};
-
-	// the example condition
-	Cnds.prototype.MyCondition = function (myparam)
-	{
-		// return true if number is positive
-		return myparam >= 0;
-	};
-	
-	// ... other conditions here ...
-	
 	pluginProto.cnds = new Cnds();
 	
 	//////////////////////////////////////
 	// Actions
 	function Acts() {};
-
-	// the example action
-	Acts.prototype.MyAction = function (myparam)
-	{
-		// alert the message
-		alert(myparam);
-	};
-	
-	// ... other actions here ...
-	
 	pluginProto.acts = new Acts();
 	
 	//////////////////////////////////////
 	// Expressions
 	function Exps() {};
 	
-	// the example expression
-	Exps.prototype.MyExpression = function (ret)	// 'ret' must always be the first parameter - always return the expression's result through it!
+	Exps.prototype.GetSimpleString = function (ret, expr_)	// 'ret' must always be the first parameter - always return the expression's result through it!
 	{
-		ret.set_int(1337);				// return our value
-		// ret.set_float(0.5);			// for returning floats
-		// ret.set_string("Hello");		// for ef_return_string
-		// ret.set_any("woo");			// for ef_return_any, accepts either a number or string
+		// Check if is Windows Platform...
+		ret.set_string(this._res["getString"](expr_).value);
 	};
-	
-	// ... other expressions here ...
-	
+	Exps.prototype.GetNumberString = function (ret, expr_, num_)
+	{
+		ret.set_string(sprintf(this._res["getString"](expr_).value, num_));
+	}
 	pluginProto.exps = new Exps();
 
 }());

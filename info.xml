@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<c2addon>
+	<type>plugin</type>
+	<name>Localize</name>
+	<version>1.0</version>
+	<author>@fferegrino</author>
+	<website>http://www.scirra.com</website>
+	<documentation>https://www.scirra.com/manual/1/construct-2</documentation>
+	<description>Bring localization to your Windows Universal App.</description>
+</c2addon>

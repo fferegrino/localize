@@ -1,29 +1,17 @@
 ﻿function GetPluginSettings()
 {
 	return {
-		"name":			"MyPlugin",				// as appears in 'insert object' dialog, can be changed as long as "id" stays the same
-		"id":			"MyPlugin",				// this is used to identify this plugin and is saved to the project; never change it
+		"name":			"Localize",				// as appears in 'insert object' dialog, can be changed as long as "id" stays the same
+		"id":			"lcze",				// this is used to identify this plugin and is saved to the project; never change it
 		"version":		"1.0",					// (float in x.y format) Plugin version - C2 shows compatibility warnings based on this
-		"description":	"<appears at the bottom of the insert object dialog>",
-		"author":		"<your name/organisation>",
-		"help url":		"<your website or a manual entry on Scirra.com>",
+		"description":	"Bring localization to your Windows Universal App",
+		"author":		"@fferegrino",
+		"help url":		"Scirra.com",
 		"category":		"General",				// Prefer to re-use existing categories, but you can set anything here
-		"type":			"world",				// either "world" (appears in layout and is drawn), else "object"
+		"type":			"object",				// either "world" (appears in layout and is drawn), else "object"
 		"rotatable":	true,					// only used when "type" is "world".  Enables an angle property on the object.
-		"flags":		0						// uncomment lines to enable flags...
-					//	| pf_singleglobal		// exists project-wide, e.g. mouse, keyboard.  "type" must be "object".
-					//	| pf_texture			// object has a single texture (e.g. tiled background)
-					//	| pf_position_aces		// compare/set/get x, y...
-					//	| pf_size_aces			// compare/set/get width, height...
-					//	| pf_angle_aces			// compare/set/get angle (recommended that "rotatable" be set to true)
-					//	| pf_appearance_aces	// compare/set/get visible, opacity...
-					//	| pf_tiling				// adjusts image editor features to better suit tiled images (e.g. tiled background)
-					//	| pf_animations			// enables the animations system.  See 'Sprite' for usage
-					//	| pf_zorder_aces		// move to top, bottom, layer...
-					//  | pf_nosize				// prevent resizing in the editor
-					//	| pf_effects			// allow WebGL shader effects to be added
-					//  | pf_predraw			// set for any plugin which draws and is not a sprite (i.e. does not simply draw
-												// a single non-tiling image the size of the object) - required for effects to work properly
+		"flags":		0,
+		"dependency": "sprintf.js"
 	};
 };
 
@@ -43,49 +31,18 @@
 // AddAudioFileParam(label, description)								// a dropdown list with all imported project audio files
 
 ////////////////////////////////////////
-// Conditions
-
-// AddCondition(id,					// any positive integer to uniquely identify this condition
-//				flags,				// (see docs) cf_none, cf_trigger, cf_fake_trigger, cf_static, cf_not_invertible,
-//									// cf_deprecated, cf_incompatible_with_triggers, cf_looping
-//				list_name,			// appears in event wizard list
-//				category,			// category in event wizard list
-//				display_str,		// as appears in event sheet - use {0}, {1} for parameters and also <b></b>, <i></i>
-//				description,		// appears in event wizard dialog when selected
-//				script_name);		// corresponding runtime function name
-				
-// example				
-AddNumberParam("Number", "Enter a number to test if positive.");
-AddCondition(0, cf_none, "Is number positive", "My category", "{0} is positive", "Description for my condition!", "MyCondition");
+// Conditionss
 
 ////////////////////////////////////////
 // Actions
 
-// AddAction(id,				// any positive integer to uniquely identify this action
-//			 flags,				// (see docs) af_none, af_deprecated
-//			 list_name,			// appears in event wizard list
-//			 category,			// category in event wizard list
-//			 display_str,		// as appears in event sheet - use {0}, {1} for parameters and also <b></b>, <i></i>
-//			 description,		// appears in event wizard dialog when selected
-//			 script_name);		// corresponding runtime function name
-
-// example
-AddStringParam("Message", "Enter a string to alert.");
-AddAction(0, af_none, "Alert", "My category", "Alert {0}", "Description for my action!", "MyAction");
-
 ////////////////////////////////////////
 // Expressions
-
-// AddExpression(id,			// any positive integer to uniquely identify this expression
-//				 flags,			// (see docs) ef_none, ef_deprecated, ef_return_number, ef_return_string,
-//								// ef_return_any, ef_variadic_parameters (one return flag must be specified)
-//				 list_name,		// currently ignored, but set as if appeared in event wizard
-//				 category,		// category in expressions panel
-//				 exp_name,		// the expression name after the dot, e.g. "foo" for "myobject.foo" - also the runtime function name
-//				 description);	// description in expressions panel
-
-// example
-AddExpression(0, ef_return_number, "Leet expression", "My category", "MyExpression", "Return the number 1337.");
+AddStringParam("Key", "The key of your resource");
+AddExpression(0, ef_return_string, "Get string", "Strings", "GetSimpleString", "Get the string identified by the specified key");
+AddStringParam("Key", "The key of your resource");
+AddNumberParam("Number", "The number to be formatted");
+AddExpression(0, ef_return_string, "Get string and format number", "Strings", "GetNumberString", "Get the string identified by the specified key");
 
 ////////////////////////////////////////
 ACESDone();
@@ -100,9 +57,7 @@ ACESDone();
 // new cr.Property(ept_combo,		name,	"Item 1",		description, "Item 1|Item 2|Item 3")	// a dropdown list (initial_value is string of initially selected item)
 // new cr.Property(ept_link,		name,	link_text,		description, "firstonly")		// has no associated value; simply calls "OnPropertyChanged" on click
 
-var property_list = [
-	new cr.Property(ept_integer, 	"My property",		77,		"An example property.")
-	];
+var property_list = [];
 	
 // Called by IDE when a new object type is to be created
 function CreateIDEObjectType()
