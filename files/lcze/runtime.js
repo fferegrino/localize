@@ -47,6 +47,7 @@ cr.plugins_.lcze = function(runtime)
 	instanceProto.onCreate = function()
 	{
 		// Check if Windows appCodeName
+		if(window["c2isWindows8"])
 		this._res = WinJS["Resources"];
 	};
 	
@@ -104,8 +105,6 @@ cr.plugins_.lcze = function(runtime)
 	
 	instanceProto.onDebugValueEdited = function (header, name, value)
 	{
-		if (name === "My property")
-			this.myProperty = value;
 	};
 	/**END-PREVIEWONLY**/
 
@@ -113,7 +112,9 @@ cr.plugins_.lcze = function(runtime)
 	// Conditions
 	function Cnds() {};
 	Cnds.prototype.CheckKey = function (expr_) {
+		if(this._res)
 		return this._res["getString"](expr_) ? true : false;
+		return false;
 	}
 	pluginProto.cnds = new Cnds();
 	
@@ -128,12 +129,17 @@ cr.plugins_.lcze = function(runtime)
 	
 	Exps.prototype.GetSimpleString = function (ret, expr_)	
 	{
-		// Check if is Windows Platform...
+		if(this._res)
 		ret.set_string(this._res["getString"](expr_).value);
+		else
+			ret.set_string("Key" + expr_);
 	};
 	Exps.prototype.GetNumberString = function (ret, expr_, num_)
 	{
+		if(this._res)
 		ret.set_string(sprintf(this._res["getString"](expr_).value, num_));
+		else
+			ret.set_string("Key" + expr_ + ": " + num_);
 	}
 	pluginProto.exps = new Exps();
 
