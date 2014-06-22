@@ -10,13 +10,15 @@
 		"category":		"General",				// Prefer to re-use existing categories, but you can set anything here
 		"type":			"object",				// either "world" (appears in layout and is drawn), else "object"
 		"rotatable":	true,					// only used when "type" is "world".  Enables an angle property on the object.
-		"flags":		0 | pf_singleglobal		// exists project-wide, e.g. mouse, keyboard.  "type" must be "object".
+		"flags":		0 | pf_singleglobal,		// exists project-wide, e.g. mouse, keyboard.  "type" must be "object".
 		"dependency": "sprintf.js"
 	};
 };
 
 ////////////////////////////////////////
 // Conditionss
+AddStringParam("Key", "The key of your resource");
+AddCondition(0, cf_none, "Resource dictionary contains key", "Resources", "Check if your resource dictionary contains the key <b>{0}</b>", "Check if your dictionary contains the specified key", "CheckKey");
 
 ////////////////////////////////////////
 // Actions
@@ -24,10 +26,10 @@
 ////////////////////////////////////////
 // Expressions
 AddStringParam("Key", "The key of your resource");
-AddExpression(0, ef_return_string, "Get string", "Strings", "GetSimpleString", "Get the string identified by the specified key");
+AddExpression(0, ef_return_string, "Get string", "Resources", "GetSimpleString", "Get the string identified by the specified key");
 AddStringParam("Key", "The key of your resource");
 AddNumberParam("Number", "The number to be formatted");
-AddExpression(0, ef_return_string, "Get string and format number", "Strings", "GetNumberString", "Get the string identified by the specified key");
+AddExpression(1, ef_return_string, "Get string and format number", "Resources", "GetNumberString", "Get the string identified by the specified key");
 
 ////////////////////////////////////////
 ACESDone();

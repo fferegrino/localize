@@ -112,6 +112,9 @@ cr.plugins_.lcze = function(runtime)
 	//////////////////////////////////////
 	// Conditions
 	function Cnds() {};
+	Cnds.prototype.CheckKey = function (expr_) {
+		return this._res["getString"](expr_) ? true : false;
+	}
 	pluginProto.cnds = new Cnds();
 	
 	//////////////////////////////////////
