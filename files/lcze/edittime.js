@@ -6,7 +6,7 @@
 		"version":		"1.0",					// (float in x.y format) Plugin version - C2 shows compatibility warnings based on this
 		"description":	"Bring localization to your Windows Universal App",
 		"author":		"@fferegrino",
-		"help url":		"Scirra.com",
+		"help url":		"http://blog.fferegrino.org",
 		"category":		"General",				// Prefer to re-use existing categories, but you can set anything here
 		"type":			"object",				// either "world" (appears in layout and is drawn), else "object"
 		"rotatable":	true,					// only used when "type" is "world".  Enables an angle property on the object.
