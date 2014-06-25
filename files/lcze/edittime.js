@@ -26,11 +26,13 @@ AddCondition(0, cf_none, "Resource dictionary contains key", "Resources", "Check
 ////////////////////////////////////////
 // Expressions
 AddStringParam("Key", "The key of your resource");
-AddExpression(0, ef_return_string, "Get string", "Resources", "GetSimpleString", "Get the string identified by the specified key");
+AddExpression(0, ef_return_string, "Get string", "Resources", "GetString", "Get the string identified by the specified key");
 AddStringParam("Key", "The key of your resource");
 AddNumberParam("Number", "The number to be formatted");
-AddExpression(1, ef_return_string, "Get string and format number", "Resources", "GetNumberString", "Get the string identified by the specified key");
-
+AddExpression(1, ef_return_string, "Get string and format number", "Resources", "GetFormattedNumber", "Get the string identified by the specified key");
+AddStringParam("Key", "The key of your resource");
+AddStringParam("String", "The string to be formatted");
+AddExpression(2, ef_return_string, "Get string and format string", "Resources", "GetFormattedString", "Get the string identified by the specified key");
 ////////////////////////////////////////
 ACESDone();
 

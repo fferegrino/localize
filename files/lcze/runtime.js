@@ -127,14 +127,21 @@ cr.plugins_.lcze = function(runtime)
 	// Expressions
 	function Exps() {};
 	
-	Exps.prototype.GetSimpleString = function (ret, expr_)	
+	Exps.prototype.GetString = function (ret, expr_)	
 	{
 		if(this._res)
 		ret.set_string(this._res["getString"](expr_).value);
 		else
 			ret.set_string("Key" + expr_);
 	};
-	Exps.prototype.GetNumberString = function (ret, expr_, num_)
+	Exps.prototype.GetFormattedNumber = function (ret, expr_, num_)
+	{
+		if(this._res)
+			ret.set_string(sprintf(this._res["getString"](expr_).value, num_));
+		else
+			ret.set_string("Key" + expr_ + ": " + num_);
+	}
+	Exps.prototype.GetFormattedString = function (ret, expr_, num_)
 	{
 		if(this._res)
 		ret.set_string(sprintf(this._res["getString"](expr_).value, num_));
