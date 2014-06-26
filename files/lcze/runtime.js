@@ -49,6 +49,7 @@ cr.plugins_.lcze = function(runtime)
 		// Check if Windows appCodeName
 		if(window["c2isWindows8"])
 		this._res = WinJS["Resources"];
+		this.aA = []; // Empty array
 	};
 	
 	// called whenever an instance is destroyed
@@ -121,6 +122,17 @@ cr.plugins_.lcze = function(runtime)
 	//////////////////////////////////////
 	// Actions
 	function Acts() {};
+	Acts.prototype.AppendStringArray = function (str_) {
+		this.aA.push(str_);
+	};
+	Acts.prototype.AppendNumberArray = function (nmbr_) {
+		this.aA.push(nmbr_);
+	};
+	Acts.prototype.ClearArray = function(){
+	   while(this.aA.length > 0 ){
+			this.aA.pop();
+	   }
+	};
 	pluginProto.acts = new Acts();
 	
 	//////////////////////////////////////
@@ -133,21 +145,29 @@ cr.plugins_.lcze = function(runtime)
 		ret.set_string(this._res["getString"](expr_).value);
 		else
 			ret.set_string("Key" + expr_);
-	};
+	}; Exps.prototype.GetSimpleString = Exps.prototype.GetString; // Must be erased on the next release
+	
 	Exps.prototype.GetFormattedNumber = function (ret, expr_, num_)
 	{
 		if(this._res)
 			ret.set_string(sprintf(this._res["getString"](expr_).value, num_));
 		else
 			ret.set_string("Key" + expr_ + ": " + num_);
-	}
+	}; Exps.prototype.GetNumberString = Exps.prototype.GetFormattedNumber; 
 	Exps.prototype.GetFormattedString = function (ret, expr_, num_)
 	{
 		if(this._res)
 		ret.set_string(sprintf(this._res["getString"](expr_).value, num_));
 		else
 			ret.set_string("Key" + expr_ + ": " + num_);
-	}
+	};
+	Exps.prototype.GetStringArray = function(ret, key_) {
+		if(this._res)
+			ret.set_string(vsprintf(this._res["getString"](key_).value, this.aA));
+		else
+			ret.set_string(key_);
+		
+	};
 	pluginProto.exps = new Exps();
 
 }());

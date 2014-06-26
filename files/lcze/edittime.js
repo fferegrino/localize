@@ -22,17 +22,31 @@ AddCondition(0, cf_none, "Resource dictionary contains key", "Resources", "Check
 
 ////////////////////////////////////////
 // Actions
-
+AddStringParam("String", "String to append to the parameter array");
+AddAction(0, af_none, "Add string to the parameters array", "Parameters array", "Append string <b>{0}</b> to the parameters array", "Append string to the parameters array before formatting", "AppendStringArray");
+AddNumberParam("Number", "Number to append to the parameter array");
+AddAction(1, af_none, "Add number to the parameters array", "Parameters array", "Append number <b>{0}</b> to the parameters array", "Append number to the parameters array before formatting", "AppendNumberArray");
+AddAction(2, af_none, "Clear the parameters array", "Parameters array", "Clear the parameters array", "Clear the parameters array", "ClearArray");
 ////////////////////////////////////////
 // Expressions
 AddStringParam("Key", "The key of your resource");
-AddExpression(0, ef_return_string, "Get string", "Resources", "GetString", "Get the string identified by the specified key");
+AddExpression(3, ef_return_string, "Get string", "Resources", "GetSimpleString", "Get the string identified by the specified key");
+AddStringParam("Key", "The key of your resource");
+AddExpression(0, ef_return_string | cf_deprecated, "Get string", "Resources", "GetString", "Get the string identified by the specified key");
+///
 AddStringParam("Key", "The key of your resource");
 AddNumberParam("Number", "The number to be formatted");
-AddExpression(1, ef_return_string, "Get string and format number", "Resources", "GetFormattedNumber", "Get the string identified by the specified key");
+AddExpression(4, ef_return_string, "Get string and format number", "Resources", "GetFormattedNumber", "Get the string identified by the specified key");
+AddStringParam("Key", "The key of your resource");
+AddNumberParam("Number", "The number to be formatted");
+AddExpression(1, ef_return_string | cf_deprecated, "Get string and format number", "Resources", "GetNumberString", "Get the string identified by the specified key");
+///
 AddStringParam("Key", "The key of your resource");
 AddStringParam("String", "The string to be formatted");
 AddExpression(2, ef_return_string, "Get string and format string", "Resources", "GetFormattedString", "Get the string identified by the specified key");
+///
+AddStringParam("Key", "The key of your resource");
+AddExpression(5, ef_return_string, "Get the resource formatted string", "Resources", "GetStringArray", "Get the resource formatted string");
 ////////////////////////////////////////
 ACESDone();
 
