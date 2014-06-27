@@ -47,6 +47,10 @@ AddExpression(2, ef_return_string, "Get string and format string", "Resources", 
 ///
 AddStringParam("Key", "The key of your resource");
 AddExpression(5, ef_return_string, "Get the resource formatted string", "Resources", "GetStringArray", "Get the resource formatted string");
+///
+AddStringParam("Expression", "The expression");
+AddAnyTypeParam("Data", "Data to be format");
+AddExpression(6, ef_return_string, "Format expression", "Strings", "FormatExpression", "Format expression");
 ////////////////////////////////////////
 ACESDone();
 

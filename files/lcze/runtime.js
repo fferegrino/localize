@@ -168,6 +168,9 @@ cr.plugins_.lcze = function(runtime)
 			ret.set_string(key_);
 		
 	};
+	Exps.prototype.FormatExpression = function(ret, expr_, data_){
+		ret.set_string(sprintf(expr_, data_));
+	};
 	pluginProto.exps = new Exps();
 
 }());
