@@ -47,7 +47,7 @@ cr.plugins_.lcze = function(runtime)
 	instanceProto.onCreate = function()
 	{
 		// Check if Windows appCodeName
-		if(window["c2isWindows8"])
+		if(window["c2isWindows8"] || window["c2isWindowsPhone81"] || window["c2isWindowsPhone8"])
 		this._res = WinJS["Resources"];
 		this.aA = []; // Empty array
 	};
